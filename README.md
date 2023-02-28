@@ -40,9 +40,9 @@ git reset HEAD <file> 拉取最近一次提交到版本库的文件到暂存区=
 git clone 连接 #克隆仓库（包括推送和分支）
 ssh-keygen -t rsa -C "youremail@example.com" #密钥类型可以用 -t 选项指定,-C来指定密钥中的注释字段的注释
 设置github  ssh key
-git remote add origin git@github.com:qwerters/gittest.git(使用git remote rm origin解除与远程仓库的绑定)
-git push <远程主机名> <本地分支名>:<远程分支名> 或git push -u origin<远程主机名> master<分支名>(此时本地分支名与远程分支名相同) 或 git push(推送当前分支,git push --set-upstream origin dev关联当前本地分支与远端的dev分支后可使用git push)
-推送分支到远程仓库（包括路径上的提交一并上传），在远端产生多个节点推送。#第一次推送master分支时，加-u参数(验证时输入yes)（和远端仓库合并，可能存在冲突）
+git remote add origin（远程仓库名字） git@github.com:qwerters/gittest.git(使用git remote rm origin解除与远程仓库的绑定)
+git push <远程主机名> <本地分支名>:<远程分支名> 或git push -u（=push一次+设置远程分支与本地分支关联） origin<远程主机名> master<分支名>(此时本地分支名与远程分支名相同) 或 git push(推送当前分支,git push --set-upstream origin dev关联当前本地分支与远端的dev分支后可使用git push)
+推送分支到远程仓库（包括路径上的提交一并上传），在远端产生多个节点推送。#推送远程不存在的master分支时，可以加-u参数(验证时输入yes)（和远端仓库合并，可能存在冲突）
 git pull <远程主机名> <远程分支名>:<本地分支名> 即将远程主机的某个分支的更新取回，并与本地指定的分支合并
 git pull #将远程仓库中的更改合并到当前分支中（目标分支的名称必须和本地分支完全相同）（产生一次提交）==git fetch + git merge 或 git fetch + git rebase（根据配置的不同）
 git rebase:
@@ -94,7 +94,6 @@ git log --graph #命令可以看到分支合并图
 git tag v1.0 [HEAD/id] [-m "version 0.1 released"（说明）,git show <tagname>可以看到说明文字]#给HEAD（省略[HEAD/id] ）或指定提交打标签
 git tag 查看标签
 git tag -d v0.1#删除标签
-
-
-
-
+git push origin master --tags/v1.2 或git push [origin] [分支] --tags#--tag：推送所有标签到远程。
+忽略特殊文件:建立文件.gitignore *.py !.gitignore（不能忽略已经在缓存区的文件）
+git config --global alias.unstage 'reset HEAD' 设置reset HEAD命令别名为unstage
