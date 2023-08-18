@@ -9,11 +9,15 @@ git commit -am "描述"
 git reflog
 git log --graph --oneline origin/master
 git rm==rm 文件  && git add 文件
-git diff 文件名 #比较暂存区和工作区文件
-git restore <file1> #暂存区文件拉到工作区
-git restore --staged <file1> 版本库HEAD->暂存区
-git reset --hard HEAD /HEAD^ / HEAD^^ / HEAD~3 /部分版本号 #版本库->暂存区->工作区
-git reset --soft HEAD /HEAD^ / HEAD^^ / HEAD~3 /部分版本号 #版本库->暂存区
+git rm --cached 文件#从暂存区中删除文件
+git diff [省略:比较暂存区和工作区文件] [--cached:查看index file与commit的差别] [HEAD:查看working tree和commit的差别] 文件名(省略:所有文件) 
+git restore <file1> #恢复文件,暂存区->工作区
+git restore --staged <file1> #恢复文件,版本库->暂存区
+git reset --hard HEAD /HEAD^ / HEAD^^ / HEAD~3 /部分版本号 #版本库和暂存区和工作区
+git reset --mixed(默认)HEAD(默认) /HEAD^ / HEAD^^ / HEAD~3 /部分版本号#版本库和暂存区
+git reset --soft /HEAD^ / HEAD^^ / HEAD~3 /部分版本号 #版本库
+git reset #撤销git add
+git revert HEAD
 git remote add origin git@github.com:qwerters/gittest.git#添加远程仓库
 git remote rm origin
 git push -u <远程主机名> <本地分支名>:<远程分支名> #创建远程分支并推送
@@ -36,11 +40,13 @@ git remote -v(显示更详细的信息)
 git checkout -b dev origin/dev#新建一个分支,与指定的远程分支建立追踪关系== git branch --track [branch] [remote-branch]
 git branch dev#创建dev分支
 git checkout dev ==git switch master#切换dev分支
+git checkout id/HEAD^/HEAD~1#分离HEAD
 git checkout -b dev ==git switch -c dev#创建dev分支，然后切换到dev分支
 git branch --set-upstream-to=origin/master master#设置追踪关系
 git stash
 git stash list
-git stash pop
+git stash pop==git stash apply stash@{0}&& git stash drop stash@{0}
+git stash clear #删除所有的暂存库
 git cherry-pick 4c805e2
 git branch # 查看本地分支
 git branch -vv#查看追踪关系
